@@ -48,6 +48,7 @@
 @property (nonatomic, strong) GZNoNetWorking *noNetVC;
 @property (nonatomic, strong) UIView *homeTopView;
 
+@property (nonatomic, strong) UIView *Loadview;
 
 @end
 
@@ -236,6 +237,17 @@ static NSString *Identifier = @"GZMineTableViewCell";
     return _headerImageV;
 }
 
+-(UIView *)Loadview
+{
+    if (!_Loadview) {
+        _Loadview = [[UIView alloc] initWithFrame:self.view.bounds];
+        _Loadview.backgroundColor = [UIColor clearColor];
+        
+        [self.tableView addSubview: _Loadview];
+    }
+    return _Loadview;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -264,7 +276,9 @@ static NSString *Identifier = @"GZMineTableViewCell";
     [super viewWillAppear:animated];
     self.navigationController.delegate = self;
     
-    [MBProgressHUD showMessage:@"加载中..."];
+    self.Loadview.hidden = NO;
+    [self.Loadview appendActivityView:[UIColor blackColor]];
+    
     [self getData];
     
     NSString *homeStr;
@@ -321,7 +335,9 @@ static NSString *Identifier = @"GZMineTableViewCell";
                              };
     
     [GZHttpTool post:URL params:params success:^(NSDictionary *obj) {
-        [MBProgressHUD hideHUD];
+       
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
         
         self.noNetVC.hidden = YES;
         self.homeTopView.hidden = YES;
@@ -374,7 +390,9 @@ static NSString *Identifier = @"GZMineTableViewCell";
         
     } failure:^(NSError *error) {
         
-        [MBProgressHUD hideHUD];
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
+        
         
         self.noNetVC.hidden = NO;
         self.homeTopView.hidden = NO;

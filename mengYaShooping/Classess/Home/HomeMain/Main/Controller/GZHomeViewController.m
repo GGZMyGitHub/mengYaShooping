@@ -229,7 +229,7 @@ static NSString * TableViewIdentity = @"cellID";
     item3.title = mineStr;
     
     self.Loadview.hidden = NO;
-    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
+    [self.Loadview appendActivityView:[UIColor blackColor]];
     
     [self MJRefresh];
 }

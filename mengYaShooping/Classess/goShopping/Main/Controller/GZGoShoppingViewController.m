@@ -63,6 +63,8 @@
 @property (nonatomic, copy) NSString *payforStr;
 @property (nonatomic, copy) NSString *delegateStr;
 
+@property (nonatomic, strong) UIView *Loadview;
+
 @end
 
 static NSString *TableViewIdentity = @"goShopingCellID";
@@ -123,6 +125,17 @@ static NSString *TableViewIdentity = @"goShopingCellID";
         _bottomView.backgroundColor = [UIColor whiteColor];
     }
     return _bottomView;
+}
+
+-(UIView *)Loadview
+{
+    if (!_Loadview) {
+        _Loadview = [[UIView alloc] initWithFrame:self.view.bounds];
+        _Loadview.backgroundColor = [UIColor clearColor];
+        
+        [self.tableView addSubview: _Loadview];
+    }
+    return _Loadview;
 }
 
 -(GGZButton *)payForBtn
@@ -186,7 +199,9 @@ static NSString *TableViewIdentity = @"goShopingCellID";
                 }else if ([weakSelf.editBarButton.title isEqualToString:@"编辑"] || [weakSelf.editBarButton.title isEqualToString:@"edit"] || [weakSelf.editBarButton.title isEqualToString:@"szerkesztése"])
                 {
                     if (totalCarStr != nil) {
-                        [MBProgressHUD showMessage:@"加载中..."];
+                       
+                        weakSelf.Loadview.hidden = NO;
+                        [weakSelf.Loadview appendActivityView:[UIColor blackColor]];
                         
                         //立即购买，请求确认订单数据，请求成功后跳转确认订单界面。
                         NSDictionary *params = @{
@@ -201,7 +216,8 @@ static NSString *TableViewIdentity = @"goShopingCellID";
                             GZSureOrderResultModel *resultModel = [[GZSureOrderResultModel alloc] initWithDictionary:obj error:nil];
                             
                             if ([resultModel.msgcode isEqualToString:@"1"]) {
-                                [MBProgressHUD hideHUD];
+                                weakSelf.Loadview.hidden = YES;
+                                [weakSelf.Loadview removeActivityView];
                                 
                                 GZSureOrderDataModel *dataModel = [[GZSureOrderDataModel alloc] initWithDictionary:resultModel.data error:nil];
 
@@ -219,7 +235,9 @@ static NSString *TableViewIdentity = @"goShopingCellID";
                                 
                             }else
                             {
-                                [MBProgressHUD hideHUD];
+                                weakSelf.Loadview.hidden = YES;
+                                [weakSelf.Loadview removeActivityView];
+                                
                                 [MBProgressHUD showAlertMessage:resultModel.msg];
                             }
                             //清空carID数组
@@ -227,7 +245,9 @@ static NSString *TableViewIdentity = @"goShopingCellID";
                             
                         } failure:^(NSError *error) {
                             
-                            [MBProgressHUD hideHUD];
+                            weakSelf.Loadview.hidden = YES;
+                            [weakSelf.Loadview removeActivityView];
+        
                             [MBProgressHUD showAlertMessage:@"网络错误"];
                         }];
                     }
@@ -439,8 +459,6 @@ static NSString *TableViewIdentity = @"goShopingCellID";
     self.navigationController.title = @"购物车";
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    [MBProgressHUD showMessage:@"加载中..."];
-
     [self.advertisementView addSubview:self.advertisementLabel];
     [self.advertisementView addSubview:self.advertisementImg];
     
@@ -460,6 +478,9 @@ static NSString *TableViewIdentity = @"goShopingCellID";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.Loadview.hidden = NO;
+    [self.Loadview appendActivityView:[UIColor blackColor]];
     
     [self getData];
     
@@ -568,7 +589,9 @@ static NSString *TableViewIdentity = @"goShopingCellID";
         
         if ([resultModel.msgcode isEqualToString:@"1"]) {
         
-            [MBProgressHUD hideHUD];
+            self.Loadview.hidden = YES;
+            [self.Loadview removeActivityView];
+        
             [self.view addSubview:self.bottomView];
             
             [self.dataSource removeAllObjects];
@@ -618,8 +641,10 @@ static NSString *TableViewIdentity = @"goShopingCellID";
             
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
-
+      
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
+        
         self.noNetVC.hidden = NO;
         self.homeTopView.hidden = NO;
         

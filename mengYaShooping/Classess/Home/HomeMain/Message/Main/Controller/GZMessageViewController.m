@@ -340,7 +340,8 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
         [self.tableView reloadData];
         
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
         
         self.noNetVC.hidden = NO;
         self.homeTopView.hidden = NO;
@@ -362,7 +363,7 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
 - (void)GZTopScrollMenu:(GZTopScrollMenu *)topScrollMenu didSelectTitleAtIndex:(NSInteger)index
 {
     self.Loadview.hidden = NO;
-    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
+    [self.Loadview appendActivityView:[UIColor blackColor]];
 
     self.typeMessage = index;
     

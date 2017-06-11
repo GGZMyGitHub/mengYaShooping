@@ -242,7 +242,7 @@ static NSString *collectionHeaderIdentifier = @"CollectionViewHeaderView";
     item3.title = mineStr;
     
     self.Loadview.hidden = NO;
-    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
+    [self.Loadview appendActivityView:[UIColor blackColor]];
     
     if (_iSenterViewDiDLoad == NO) {
         //默认选中第几行
