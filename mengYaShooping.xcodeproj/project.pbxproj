@@ -10,8 +10,6 @@
 		180A2C651EA3105D003768CE /* GZLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A2C631EA3105D003768CE /* GZLoginViewController.m */; };
 		180A2C661EA3105D003768CE /* GZLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A2C641EA3105D003768CE /* GZLoginViewController.xib */; };
 		18112C871EA1F647000E5ADF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 18112C861EA1F647000E5ADF /* main.m */; };
-		18112C8A1EA1F647000E5ADF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 18112C891EA1F647000E5ADF /* AppDelegate.m */; };
-		18112C8D1EA1F647000E5ADF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18112C8C1EA1F647000E5ADF /* ViewController.m */; };
 		18112C901EA1F647000E5ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18112C8E1EA1F647000E5ADF /* Main.storyboard */; };
 		18112C921EA1F647000E5ADF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18112C911EA1F647000E5ADF /* Assets.xcassets */; };
 		18112C951EA1F647000E5ADF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18112C931EA1F647000E5ADF /* LaunchScreen.storyboard */; };
