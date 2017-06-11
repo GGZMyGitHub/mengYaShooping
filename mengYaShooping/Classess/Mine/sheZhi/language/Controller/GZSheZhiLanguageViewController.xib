@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GZSheZhiLanguageViewController">
+            <connections>
+                <outlet property="ChineseBtn" destination="6QP-WD-wgK" id="nef-ad-5GD"/>
+                <outlet property="chineseImgV" destination="I5h-1K-nUf" id="26A-IW-fll"/>
+                <outlet property="englishBtn" destination="hqf-wM-t1k" id="f7k-Af-IFF"/>
+                <outlet property="englishImgV" destination="gUz-e5-e9f" id="qxL-4T-1p1"/>
+                <outlet property="magyarBtn" destination="BGP-XN-DOJ" id="ExZ-bd-ABm"/>
+                <outlet property="magyarImgV" destination="eYN-8r-oFL" id="ST0-4p-PxM"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前语言" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBB-px-xrz">
+                    <rect key="frame" x="159" y="30" width="57.5" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="U8P-BX-dbR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59607843137254901" green="0.59607843137254901" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGP-XN-DOJ">
+                    <rect key="frame" x="0.0" y="80" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="7eJ-5J-Ad3"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Magyar" image="Hungary2_">
+                        <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" image="Hungary1_"/>
+                    <connections>
+                        <action selector="magyarBtn:" destination="-1" eventType="touchUpInside" id="aLc-xh-d5w"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqf-wM-t1k">
+                    <rect key="frame" x="0.0" y="150" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="nYL-la-yNz"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="English" image="English2_">
+                        <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" image="English1_"/>
+                    <connections>
+                        <action selector="EnglishBtn:" destination="-1" eventType="touchUpInside" id="ahG-oJ-QsI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6QP-WD-wgK">
+                    <rect key="frame" x="0.0" y="220" width="375" height="50"/>
+                    <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="gPm-dE-Thb"/>
+                    </constraints>
+                    <inset key="titleEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="imageEdgeInsets" minX="-29" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="中文" image="China2_">
+                        <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" image="China1_"/>
+                    <connections>
+                        <action selector="ChineseBtn:" destination="-1" eventType="touchUpInside" id="wmn-XK-hsD"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duihao_" translatesAutoresizingMaskIntoConstraints="NO" id="eYN-8r-oFL">
+                    <rect key="frame" x="336" y="96" width="24" height="18"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duihao_" translatesAutoresizingMaskIntoConstraints="NO" id="gUz-e5-e9f">
+                    <rect key="frame" x="336" y="166" width="24" height="18"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duihao_" translatesAutoresizingMaskIntoConstraints="NO" id="I5h-1K-nUf">
+                    <rect key="frame" x="336" y="236.5" width="24" height="18"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="eYN-8r-oFL" secondAttribute="trailing" constant="15" id="1el-8R-bzG"/>
+                <constraint firstItem="cBB-px-xrz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="3eM-jq-csg"/>
+                <constraint firstAttribute="trailing" secondItem="I5h-1K-nUf" secondAttribute="trailing" constant="15" id="4sq-ST-XsI"/>
+                <constraint firstAttribute="trailing" secondItem="BGP-XN-DOJ" secondAttribute="trailing" id="BmZ-4A-tZt"/>
+                <constraint firstItem="eYN-8r-oFL" firstAttribute="centerY" secondItem="BGP-XN-DOJ" secondAttribute="centerY" id="FO9-fQ-zHS"/>
+                <constraint firstItem="hqf-wM-t1k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HPu-Ra-3Zf"/>
+                <constraint firstAttribute="trailing" secondItem="6QP-WD-wgK" secondAttribute="trailing" id="JuW-7d-9Jm"/>
+                <constraint firstItem="hqf-wM-t1k" firstAttribute="top" secondItem="BGP-XN-DOJ" secondAttribute="bottom" constant="20" id="N8d-w3-eVx"/>
+                <constraint firstItem="6QP-WD-wgK" firstAttribute="top" secondItem="hqf-wM-t1k" secondAttribute="bottom" constant="20" id="PP6-0n-2Yv"/>
+                <constraint firstItem="gUz-e5-e9f" firstAttribute="centerY" secondItem="hqf-wM-t1k" secondAttribute="centerY" id="QYI-eO-Qs7"/>
+                <constraint firstItem="cBB-px-xrz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="VWN-F3-7zI"/>
+                <constraint firstItem="BGP-XN-DOJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ff9-zN-wwQ"/>
+                <constraint firstAttribute="trailing" secondItem="gUz-e5-e9f" secondAttribute="trailing" constant="15" id="gBg-T7-jzf"/>
+                <constraint firstAttribute="trailing" secondItem="hqf-wM-t1k" secondAttribute="trailing" id="hDp-0i-X2O"/>
+                <constraint firstItem="BGP-XN-DOJ" firstAttribute="top" secondItem="cBB-px-xrz" secondAttribute="bottom" constant="30" id="i9z-6X-b0Y"/>
+                <constraint firstItem="6QP-WD-wgK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="my0-cB-IA5"/>
+                <constraint firstItem="I5h-1K-nUf" firstAttribute="centerY" secondItem="6QP-WD-wgK" secondAttribute="centerY" id="ykg-5A-w15"/>
+            </constraints>
+            <point key="canvasLocation" x="-112.5" y="7.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="China1_" width="25" height="16"/>
+        <image name="China2_" width="25" height="16"/>
+        <image name="English1_" width="25" height="16"/>
+        <image name="English2_" width="25" height="16"/>
+        <image name="Hungary1_" width="25" height="16"/>
+        <image name="Hungary2_" width="25" height="16"/>
+        <image name="duihao_" width="24" height="18"/>
+    </resources>
+</document>

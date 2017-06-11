@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GZfeedBackViewController">
+            <connections>
+                <outlet property="saveBtn" destination="PEE-BJ-tU4" id="KgU-dm-34T"/>
+                <outlet property="textView" destination="B22-5X-eXV" id="iNW-ah-6jR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="B22-5X-eXV">
+                    <rect key="frame" x="0.0" y="10" width="375" height="143"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="143" id="rjo-oe-qvB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PEE-BJ-tU4">
+                    <rect key="frame" x="12" y="177" width="351" height="38"/>
+                    <color key="backgroundColor" red="0.9137254901960784" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="38" id="Yai-GU-QhG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="保存">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="feedBack:" destination="-1" eventType="touchUpInside" id="z0Q-Mz-nbR"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="PEE-BJ-tU4" secondAttribute="trailing" constant="12" id="HcE-b6-Z42"/>
+                <constraint firstItem="B22-5X-eXV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Vcs-7o-nPS"/>
+                <constraint firstItem="PEE-BJ-tU4" firstAttribute="top" secondItem="B22-5X-eXV" secondAttribute="bottom" constant="24" id="cBS-rh-deG"/>
+                <constraint firstItem="B22-5X-eXV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="fig-cA-1ru"/>
+                <constraint firstAttribute="trailing" secondItem="B22-5X-eXV" secondAttribute="trailing" id="nd1-kH-IAz"/>
+                <constraint firstItem="PEE-BJ-tU4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="12" id="x36-EO-NsD"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

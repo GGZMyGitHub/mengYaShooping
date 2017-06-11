@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="GZHomeDetailCell">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="472"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="372" height="472"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yDr-6X-oVc">
+                        <rect key="frame" x="0.0" y="1" width="371" height="470"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q6A-Fd-dng">
+                                <rect key="frame" x="10" y="10" width="351" height="351"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Q6A-Fd-dng" secondAttribute="height" multiplier="1:1" id="KPv-vG-sfv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26a-ab-Z85">
+                                <rect key="frame" x="10" y="366" width="351" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="nD6-Aw-tPp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bag-zu-gym">
+                                <rect key="frame" x="10" y="411" width="351" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ejN-zI-q9N"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.56862745098039214" green="0.56862745098039214" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9SE-RP-DNq">
+                                <rect key="frame" x="10" y="476" width="0.0" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="Z2e-IX-Hp7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.89411764705882346" green="0.30196078431372547" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJu-IH-dxR">
+                                <rect key="frame" x="331" y="471" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bJu-IH-dxR" secondAttribute="height" id="ktY-Kr-9He"/>
+                                    <constraint firstAttribute="height" constant="30" id="rld-kI-WMl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <connections>
+                                    <action selector="goShoopping:" destination="gTV-IL-0wX" eventType="touchUpInside" id="bYo-jG-n4c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="9SE-RP-DNq" firstAttribute="leading" secondItem="yDr-6X-oVc" secondAttribute="leading" constant="10" id="6dh-ds-dec"/>
+                            <constraint firstAttribute="trailing" secondItem="Q6A-Fd-dng" secondAttribute="trailing" constant="10" id="Qvj-gj-W4r"/>
+                            <constraint firstItem="Q6A-Fd-dng" firstAttribute="leading" secondItem="yDr-6X-oVc" secondAttribute="leading" constant="10" id="SZy-rv-MMd"/>
+                            <constraint firstAttribute="trailing" secondItem="bJu-IH-dxR" secondAttribute="trailing" constant="10" id="Tti-oI-gw8"/>
+                            <constraint firstAttribute="trailing" secondItem="26a-ab-Z85" secondAttribute="trailing" constant="10" id="UMf-wl-Fln"/>
+                            <constraint firstItem="26a-ab-Z85" firstAttribute="leading" secondItem="yDr-6X-oVc" secondAttribute="leading" constant="10" id="VfD-ka-6Gw"/>
+                            <constraint firstItem="bJu-IH-dxR" firstAttribute="top" secondItem="bag-zu-gym" secondAttribute="bottom" constant="10" id="WJX-0Z-g5A"/>
+                            <constraint firstItem="9SE-RP-DNq" firstAttribute="top" secondItem="bag-zu-gym" secondAttribute="bottom" constant="15" id="YBM-Jj-BRe"/>
+                            <constraint firstItem="Q6A-Fd-dng" firstAttribute="top" secondItem="yDr-6X-oVc" secondAttribute="top" constant="10" id="drH-pE-qS7"/>
+                            <constraint firstAttribute="trailing" secondItem="bag-zu-gym" secondAttribute="trailing" constant="10" id="fiQ-9b-hMj"/>
+                            <constraint firstItem="bag-zu-gym" firstAttribute="leading" secondItem="yDr-6X-oVc" secondAttribute="leading" constant="10" id="jjw-aF-NwV"/>
+                            <constraint firstItem="26a-ab-Z85" firstAttribute="top" secondItem="Q6A-Fd-dng" secondAttribute="bottom" constant="5" id="qiR-jn-Gr7"/>
+                            <constraint firstItem="bag-zu-gym" firstAttribute="top" secondItem="26a-ab-Z85" secondAttribute="bottom" constant="5" id="vvr-ZZ-Tfy"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yDr-6X-oVc" secondAttribute="trailing" constant="1" id="KLl-hI-H20"/>
+                <constraint firstItem="yDr-6X-oVc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="ctU-Df-Gr8"/>
+                <constraint firstItem="yDr-6X-oVc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="iIm-UO-9Ee"/>
+                <constraint firstAttribute="bottom" secondItem="yDr-6X-oVc" secondAttribute="bottom" constant="1" id="vFS-cz-fq6"/>
+            </constraints>
+            <size key="customSize" width="372" height="472"/>
+            <connections>
+                <outlet property="describeLabel" destination="bag-zu-gym" id="TvB-dP-qkb"/>
+                <outlet property="goShoppingBtn" destination="bJu-IH-dxR" id="vrW-pM-sq2"/>
+                <outlet property="imageV" destination="Q6A-Fd-dng" id="QnH-D0-2Al"/>
+                <outlet property="priceLabel" destination="9SE-RP-DNq" id="4cN-FJ-0j1"/>
+                <outlet property="titleLabel" destination="26a-ab-Z85" id="GnX-tU-IHv"/>
+            </connections>
+            <point key="canvasLocation" x="194" y="88"/>
+        </collectionViewCell>
+    </objects>
+</document>

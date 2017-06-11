@@ -1,0 +1,17 @@
+//
+//  PrefixHeader.pch
+//  DongHeng
+//
+
+//  Created by apple on 17/3/14.
+//  Copyright © 2017年 GuangZhou Gu. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "WinTreasureConfig.h"
+
+#import "XLShareSingle.h"
+
+#endif /* PrefixHeader_pch */
