@@ -23,9 +23,6 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic, assign) NSUInteger currentPage;
 
-/** 下拉刷新时的动画图片 */
-@property (nonatomic, strong) NSArray *refreshImgArr;
-
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
 @property (nonatomic) NSInteger typeMessage;
@@ -39,6 +36,8 @@
 @property (nonatomic, strong) UILabel *jifen_no_readLabel;
 @property (nonatomic, strong) UILabel *order_no_readLabel;
 @property (nonatomic, strong) UILabel *xitong_no_readLabel;
+
+@property (nonatomic, strong) UIView *Loadview;
 
 @end
 
@@ -76,14 +75,6 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
         [self.view addSubview:_tableView];
     }
     return _tableView;
-}
-
-- (NSArray *)refreshImgArr
-{
-    if (!_refreshImgArr) {
-        _refreshImgArr = @[[UIImage imageNamed:@"reflesh1_60x55"], [UIImage imageNamed:@"reflesh2_60x55"], [UIImage imageNamed:@"reflesh3_60x55"]];
-    }
-    return _refreshImgArr;
 }
 
 -(NSMutableArray *)dataSource
@@ -173,6 +164,18 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
     }
     return _order_no_readLabel;
 }
+
+-(UIView *)Loadview
+{
+    if (!_Loadview) {
+        _Loadview = [[UIView alloc] initWithFrame:self.view.bounds];
+        _Loadview.backgroundColor = [UIColor clearColor];
+        
+        [self.view addSubview: _Loadview];
+    }
+    return _Loadview;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = YHRGBA(237, 245, 245, 1.0);
@@ -208,13 +211,6 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
     }
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [self getData];
-}
-
 #pragma mark - Method
 - (void)MJRefresh
 {
@@ -226,15 +222,47 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
     }];
     
     self.tableView.mj_header = header;
-    [header setImages:self.refreshImgArr  forState:MJRefreshStateRefreshing];
-    [header setImages:self.refreshImgArr  forState:MJRefreshStatePulling];
-    [header setImages:self.refreshImgArr  forState:MJRefreshStateIdle];
     
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+#warning
+    NSString *IdleStr;
+    NSString *PullingStr;
+    NSString *RefreshingStr;
+    
+    if ([[GGZTool iSLanguageID] isEqualToString:@"0"]) {
+        
+        IdleStr = @"下拉可以刷新";
+        PullingStr = @"松开立即刷新";
+        RefreshingStr = @"正在刷新数据中...";
+        
+    }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
+        
+        IdleStr = @"Pull down to refresh";
+        PullingStr = @"Release to refresh";
+        RefreshingStr = @"Loading ...";
+        
+    }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
+        
+        IdleStr = @"";
+        PullingStr = @"";
+        RefreshingStr = @"";
+        
+    }
+    
+    
+    [header setTitle:IdleStr forState:MJRefreshStateIdle];
+    [header setTitle:PullingStr forState:MJRefreshStatePulling];
+    [header setTitle:RefreshingStr forState:MJRefreshStateRefreshing];
+    
+    header.lastUpdatedTimeLabel.hidden = YES;
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         
         weakSelf.currentPage++;
         [weakSelf getData];
     }];
+    self.tableView.mj_footer = footer;
+    
+    footer.refreshingTitleHidden = YES;
 }
 
 #pragma mark - 拉取数据
@@ -262,7 +290,8 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
 
         if ([resultModel.msgcode isEqualToString:@"1"]) {
             
-            [MBProgressHUD hideHUD];
+            self.Loadview.hidden = YES;
+            [self.Loadview removeActivityView];
             
             GZMessageDataModel *dataModel = [[GZMessageDataModel alloc] initWithDictionary:resultModel.data error:nil];
             
@@ -298,8 +327,13 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
             
         }else
         {
-            [MBProgressHUD hideHUD];
-            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            self.Loadview.hidden = YES;
+            [self.Loadview removeActivityView];
+            
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+            self.tableView.mj_footer.hidden = YES;
+
             self.currentPage--;
         }
         
@@ -327,8 +361,12 @@ static NSString *TableViewIdentity = @"tabelViewCellID";
 #pragma mark - GZTopScrollMenu代理方法
 - (void)GZTopScrollMenu:(GZTopScrollMenu *)topScrollMenu didSelectTitleAtIndex:(NSInteger)index
 {
-    [MBProgressHUD showMessage:@"加载中..."];
+    self.Loadview.hidden = NO;
+    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
+
     self.typeMessage = index;
+    
+    self.currentPage = 1;
     
     [self getData];
 }

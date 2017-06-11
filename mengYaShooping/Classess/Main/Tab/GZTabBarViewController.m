@@ -79,8 +79,16 @@
 
 - (void)getCarNumberData
 {
+    NSString * isUidStr;
+    if ([GGZTool isUid]) {
+        isUidStr = [GGZTool isUid];
+    }else
+    {
+        isUidStr = @"0";
+    }
+    
     NSDictionary *params = @{
-                             @"uid":[GGZTool isUid],
+                             @"uid":isUidStr,
                              @"action":@"User_CarList_count"
                              };
     

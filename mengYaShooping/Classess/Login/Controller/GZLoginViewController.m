@@ -253,20 +253,6 @@
                     
                     if ([resultModel.msgcode isEqualToString:@"1"]) {
                         
-                        if ([[GGZTool iSLanguageID] isEqualToString:@"0"])
-                        {
-                            [MBProgressHUD showSuccess:@"登录成功"];
-                            
-                        }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
-                            
-                            [MBProgressHUD showSuccess:@"登录成功英文"];
-                            
-                        }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
-                            
-                            [MBProgressHUD showSuccess:@"登录成功匈牙利文"];
-                        }
-                        
-                        
                         GZLoginDataModel *dataModel = [[GZLoginDataModel alloc] initWithDictionary:resultModel.data error:nil];
                         
                         self.dataModel = dataModel;
@@ -298,6 +284,20 @@
                         
                         //同步一下
                         [defaults synchronize];
+                        
+                        
+                        if ([[GGZTool iSLanguageID] isEqualToString:@"0"])
+                        {
+                            [MBProgressHUD showSuccess:@"登录成功"];
+                            
+                        }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
+                            
+                            [MBProgressHUD showSuccess:@"登录成功英文"];
+                            
+                        }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
+                            
+                            [MBProgressHUD showSuccess:@"登录成功匈牙利文"];
+                        }
                         
                         if (_selectTabBarBlock) {
                             _selectTabBarBlock();

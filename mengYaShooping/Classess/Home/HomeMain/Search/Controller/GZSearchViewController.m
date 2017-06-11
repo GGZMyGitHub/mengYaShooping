@@ -21,6 +21,8 @@
 /** 搜索栏View */
 @property (nonatomic, strong) UIView *titleView;
 
+@property (nonatomic, strong) UIBarButtonItem *rightBtnItem;
+
 /** tableVie的头视图 */
 @property (nonatomic, strong) UIView *headerView;
 
@@ -65,9 +67,6 @@ static NSString *Identifier = @"cellID";
         _searchBar.placeholder = @"请输入商品名称";
     
         _searchBar.delegate = self;
-
-        // 设置搜索框背景颜色
-    
         
         _searchBar.layer.cornerRadius = 15;
         _searchBar.layer.masksToBounds = YES;
@@ -93,6 +92,16 @@ static NSString *Identifier = @"cellID";
     return _tableView;
 }
 
+-(UIBarButtonItem *)rightBtnItem
+{
+    if (!_rightBtnItem) {
+        _rightBtnItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(sureDidClick)];
+        //设置字体大小
+        [_rightBtnItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont systemFontOfSize:15],NSFontAttributeName, nil] forState:UIControlStateNormal];
+    }
+    return _rightBtnItem;
+}
+
 -(UIView *)headerView
 {
     if (!_headerView) {
@@ -109,7 +118,7 @@ static NSString *Identifier = @"cellID";
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 30)];
         _titleLabel.text = @"   大家都在搜";
-        _titleLabel.font = [UIFont systemFontOfSize:14];
+        _titleLabel.font = [UIFont systemFontOfSize:13];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.backgroundColor = YHRGBA(237, 245, 245, 1.0);
 
@@ -199,23 +208,28 @@ static NSString *Identifier = @"cellID";
         
         self.searchBar.placeholder= @"请输入商品名称";
         self.titleLabel.text = @"   大家都在搜";
-        sureStr = @"确定";
+        sureStr = @"搜索";
         
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
         
         self.searchBar.placeholder= @"please enter product name";
         self.titleLabel.text = @"   top search results";
-        sureStr = @"confirm";
+        sureStr = @"search";
 
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
         
         self.searchBar.placeholder= @"adja meg a termék nevét";
         self.titleLabel.text = @"   kedvenc keresések";
-        sureStr = @"igen";
+        sureStr = @"搜索匈牙利文";
 
     }
+    UITextField * searchField = [self.searchBar valueForKey:@"_searchField"];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:sureStr style:UIBarButtonItemStyleDone target:self action:@selector(sureDidClick)];
+    [searchField setValue:YHRGBA(123, 123, 123, 1.0) forKeyPath:@"_placeholderLabel.textColor"];
+    [searchField setValue:[UIFont systemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
+
+    self.rightBtnItem.title = sureStr;
+    self.navigationItem.rightBarButtonItem = self.rightBtnItem;
     
     self.navigationItem.rightBarButtonItem.tintColor = YHRGBA(124, 124, 124, 1.0);
 }
@@ -269,7 +283,7 @@ static NSString *Identifier = @"cellID";
         UILabel *rectangleTagLabel = [[UILabel alloc] init];
         // 设置属性
         rectangleTagLabel.userInteractionEnabled = YES;
-        rectangleTagLabel.font = [UIFont systemFontOfSize:15];
+        rectangleTagLabel.font = [UIFont systemFontOfSize:14];
         rectangleTagLabel.textColor = YHRGBA(169, 169, 169, 1.0);
         rectangleTagLabel.backgroundColor = [UIColor whiteColor];
         rectangleTagLabel.text = self.tagsArray[i];
@@ -440,14 +454,19 @@ static NSString *Identifier = @"cellID";
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
+    
+    UILabel *lineLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, cell.height - 1, kScreenWidth, 1)];
+    lineLabel.backgroundColor = YHRGBA(222, 222, 222, 1.0);
+
+    [cell addSubview:lineLabel];
+    
     // 添加关闭按钮
     UIButton *closetButton = [[UIButton alloc] init];
     // 设置图片容器大小、图片原图居中
     closetButton.mj_size = CGSizeMake(cell.mj_h, cell.mj_h);
-    [closetButton setTitle:@"x" forState:UIControlStateNormal];
+    [closetButton setImage:[UIImage imageNamed:@"shanchu_"] forState:UIControlStateNormal];
     [closetButton addTarget:self action:@selector(closeDidClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.accessoryView = closetButton;
-    [closetButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     cell.textLabel.textColor = [UIColor grayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:14];

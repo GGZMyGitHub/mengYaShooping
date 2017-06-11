@@ -46,6 +46,8 @@
 
 @property (nonatomic) BOOL isFooter;
 
+@property (nonatomic, strong) UIView *Loadview;
+
 @end
 
 static NSString * TableViewIdentity = @"cellID";
@@ -155,6 +157,17 @@ static NSString * TableViewIdentity = @"cellID";
     return _homeTopView;
 }
 
+-(UIView *)Loadview
+{
+    if (!_Loadview) {
+        _Loadview = [[UIView alloc] initWithFrame:self.view.bounds];
+        _Loadview.backgroundColor = [UIColor clearColor];
+
+        [self.view addSubview: _Loadview];
+    }
+    return _Loadview;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -165,6 +178,7 @@ static NSString * TableViewIdentity = @"cellID";
     self.currentPage = 1;
     
     self.tableView.tableHeaderView = self.headerView;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -183,8 +197,7 @@ static NSString * TableViewIdentity = @"cellID";
         classifyStr = @"分类";
         goShoppingStr = @"购物车";
         mineStr = @"我的";
-        [MBProgressHUD showMessage:@"加载中..."];
-
+        
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
 
         self.headerView.titleLabel.text = @"hot sale";
@@ -193,7 +206,6 @@ static NSString * TableViewIdentity = @"cellID";
         classifyStr = @"classify";
         goShoppingStr = @"cart";
         mineStr = @" mine";
-        [MBProgressHUD showMessage:@"英文..."];
 
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
 
@@ -203,10 +215,8 @@ static NSString * TableViewIdentity = @"cellID";
         classifyStr = @"osztályozások";
         goShoppingStr = @"bevásárlókocsi";
         mineStr = @"saját";
-        [MBProgressHUD showMessage:@"匈牙利文..."];
-
+        
     }
-    
       
     UITabBarItem *item0 = [self.tabBarController.tabBar.items objectAtIndex:0];
     UITabBarItem *item1 = [self.tabBarController.tabBar.items objectAtIndex:1];
@@ -217,27 +227,24 @@ static NSString * TableViewIdentity = @"cellID";
     item1.title = classifyStr;
     item2.title = goShoppingStr;
     item3.title = mineStr;
-
-    [self MJRefresh];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
     
-
+    self.Loadview.hidden = NO;
+    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
+    
+    [self MJRefresh];
 }
 
 #pragma mark - Method
 - (void)MJRefresh
 {
     [self getData];
-
     GZWeakSelf;
-    MJRefreshGifHeader *header  = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
         weakSelf.currentPage = 1;
         
         [weakSelf getData];
+
     }];
     
     self.tableView.mj_header = header;
@@ -246,6 +253,10 @@ static NSString * TableViewIdentity = @"cellID";
     NSString *IdleStr;
     NSString *PullingStr;
     NSString *RefreshingStr;
+    NSString *PullDownIdleStr;
+    NSString *PullingDownStr;
+    NSString *RefreshingDownStr;
+    
 
     if ([[GGZTool iSLanguageID] isEqualToString:@"0"]) {
         
@@ -253,28 +264,40 @@ static NSString * TableViewIdentity = @"cellID";
         PullingStr = @"松开立即刷新";
         RefreshingStr = @"正在刷新数据中...";
 
+        PullDownIdleStr = @"上拉可以加载更多";
+        PullingDownStr = @"松开立即加载更多";
+        RefreshingDownStr = @"正在加载更多的数据...";
+        
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
         
         IdleStr = @"Pull down to refresh";
         PullingStr = @"Release to refresh";
         RefreshingStr = @"Loading ...";
 
+        PullDownIdleStr = @"上拉可以加载更多英文";
+        PullingDownStr = @"松开立即加载更多英文";
+        RefreshingDownStr = @"正在加载更多的数据...英文";
+        
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
         
         IdleStr = @"";
         PullingStr = @"";
         RefreshingStr = @"";
-
+        
+        PullDownIdleStr = @"上拉可以加载更多匈牙利文";
+        PullingDownStr = @"松开立即加载更多熊亚文";
+        RefreshingDownStr = @"正在加载更多的数据...匈牙利文";
     }
-
     
     [header setTitle:IdleStr forState:MJRefreshStateIdle];
     [header setTitle:PullingStr forState:MJRefreshStatePulling];
     [header setTitle:RefreshingStr forState:MJRefreshStateRefreshing];
-    
+   
+    // 设置自动切换透明度(在导航栏下面自动隐藏)
+    header.automaticallyChangeAlpha = YES;
     header.lastUpdatedTimeLabel.hidden = YES;
 
-    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    MJRefreshBackNormalFooter *footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         _isFooter = YES;
         weakSelf.currentPage++;
@@ -285,15 +308,17 @@ static NSString * TableViewIdentity = @"cellID";
 
     self.tableView.mj_footer = footer;
     
-    footer.refreshingTitleHidden = YES;
+    [footer setTitle:PullDownIdleStr forState:MJRefreshStateIdle];
+    [footer setTitle:PullingDownStr forState:MJRefreshStatePulling];
+    [footer setTitle:RefreshingDownStr forState:MJRefreshStateRefreshing];
+    
+
 }
 
 #pragma mark - 拉取数据
 - (void)getData
 {
-    
-    self.tableView.mj_footer.hidden = NO;
-    
+
     NSString *page = [NSString stringWithFormat:@"%zd",self.currentPage];
     
     NSString *uidStr;
@@ -316,8 +341,10 @@ static NSString * TableViewIdentity = @"cellID";
         GZResultHomeModel *resultModel = [[GZResultHomeModel alloc] initWithDictionary:obj error:nil];
         
         if ([resultModel.msgcode isEqualToString:@"1"]) {
-            [MBProgressHUD hideHUD];
             
+             self.Loadview.hidden = YES;
+            [self.Loadview removeActivityView];
+
             self.noNetVC.hidden = YES;
             self.homeTopView.hidden = YES;
             
@@ -347,14 +374,12 @@ static NSString * TableViewIdentity = @"cellID";
                 [self.tableView.mj_footer endRefreshing];
             }else
             {
-                [MBProgressHUD hideHUD];
-
+                
+                self.Loadview.hidden = YES;
+                [self.Loadview removeActivityView];
+                
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];
-                
-                self.tableView.mj_footer.hidden = YES;
-
-                [self.tableView.mj_footer setHidden:YES];
 
                 self.currentPage--;
             }
@@ -362,7 +387,9 @@ static NSString * TableViewIdentity = @"cellID";
             [self.tableView reloadData];
         }
     } failure:^(NSError *error) {
-        [MBProgressHUD hideHUD];
+        
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
         
         self.noNetVC.hidden = NO;
         self.homeTopView.hidden = NO;

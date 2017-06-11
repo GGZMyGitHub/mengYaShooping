@@ -236,12 +236,14 @@
             loginVC.languageID = @"sheZhiVC";
             
             NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+           
             [defaults removeObjectForKey:@"uid"];
             [defaults removeObjectForKey:@"u_ZhangHao"];
             [defaults removeObjectForKey:@"User_Nick"];
             [defaults removeObjectForKey:@"User_head"];
             [defaults removeObjectForKey:@"User_Fengmian"];
             [defaults setBool:NO forKey:@"login"];
+           
             [defaults synchronize];
             
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:loginVC];
@@ -259,7 +261,6 @@
 
     [self.view addSubview:self.backLogin];
     
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -269,14 +270,17 @@
     if ([[GGZTool iSLanguageID] isEqualToString:@"0"])
     {
         [self.backLogin setTitle:@"退出登录" forState:UIControlStateNormal];
+        self.title = @"设置";
         
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"1"]){
         
         [self.backLogin setTitle:@"log out" forState:UIControlStateNormal];
+        self.title = @"setting";
         
     }else if ([[GGZTool iSLanguageID] isEqualToString:@"2"]){
         
         [self.backLogin setTitle:@"kilépés" forState:UIControlStateNormal];
+        self.title = @"beállítások";
     }
     
     [self customTableView];

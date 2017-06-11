@@ -52,6 +52,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *oneLabelHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fiveLabelHeight;
 
+//热卖的宽度
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hotLabelWidth;
+
 
 @end
 
@@ -133,7 +136,8 @@
     {
         self.oneLabelHeight.constant = 20;
         self.fiveLabelHeight.constant = 20;
-        self.height = 485;
+        self.hotLabelWidth.constant = 60;
+        self.height = 450;
         
         
         self.oneLabel.font = [UIFont systemFontOfSize:14];
@@ -149,7 +153,9 @@
         
         self.oneLabelHeight.constant = 50;
         self.fiveLabelHeight.constant = 50;
-        self.height = 545;
+        self.hotLabelWidth.constant = 80;
+
+        self.height = 510;
 
         
         self.oneLabel.font = [UIFont systemFontOfSize:12];
@@ -165,7 +171,9 @@
         
         self.oneLabelHeight.constant = 50;
         self.fiveLabelHeight.constant = 50;
-        self.height = 545;
+        self.hotLabelWidth.constant = 140;
+
+        self.height = 510;
 
         self.oneLabel.font = [UIFont systemFontOfSize:12];
         self.twoLabel.font = [UIFont systemFontOfSize:12];

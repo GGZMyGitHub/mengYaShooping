@@ -63,6 +63,8 @@
     #import "UILabel+GZChangeLineSpaceAndWordSpace.h"
     #import "UIButton+GZCS_FixMultiClick.h"
     #import "UIViewController+BackButtonHandler.h"
+    #import "UIView+GZactivityView.h"
+
 
 #pragma mark - Tools
     #import "GZFMDBTool.h"

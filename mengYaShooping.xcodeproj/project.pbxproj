@@ -120,6 +120,7 @@
 		18CCC9471EE2F92200CCE283 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CCC9461EE2F92200CCE283 /* AdSupport.framework */; };
 		18CCC9491EE2F92C00CCE283 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CCC9481EE2F92C00CCE283 /* UserNotifications.framework */; };
 		18CCC94B1EE2F93500CCE283 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CCC94A1EE2F93500CCE283 /* libresolv.tbd */; };
+		18D96A601EED824800F5A85D /* UIView+GZactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D96A5F1EED824800F5A85D /* UIView+GZactivityView.m */; };
 		530311841ED5696100C131F2 /* GZCollectionResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 530311831ED5696100C131F2 /* GZCollectionResultModel.m */; };
 		530311871ED5696E00C131F2 /* GZColletcionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 530311861ED5696E00C131F2 /* GZColletcionDataModel.m */; };
 		5303118B1ED56BDE00C131F2 /* GZcollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 530311891ED56BDE00C131F2 /* GZcollectionCell.m */; };
@@ -471,6 +472,8 @@
 		18CCC9461EE2F92200CCE283 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		18CCC9481EE2F92C00CCE283 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		18CCC94A1EE2F93500CCE283 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		18D96A5E1EED824800F5A85D /* UIView+GZactivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GZactivityView.h"; sourceTree = "<group>"; };
+		18D96A5F1EED824800F5A85D /* UIView+GZactivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GZactivityView.m"; sourceTree = "<group>"; };
 		48D7E992B8E3381F0808489A /* Pods-mengYaShooping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mengYaShooping.release.xcconfig"; path = "Pods/Target Support Files/Pods-mengYaShooping/Pods-mengYaShooping.release.xcconfig"; sourceTree = "<group>"; };
 		530311821ED5696100C131F2 /* GZCollectionResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZCollectionResultModel.h; sourceTree = "<group>"; };
 		530311831ED5696100C131F2 /* GZCollectionResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GZCollectionResultModel.m; sourceTree = "<group>"; };
@@ -1230,6 +1233,8 @@
 		18112D251EA1F75A000E5ADF /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				18D96A5E1EED824800F5A85D /* UIView+GZactivityView.h */,
+				18D96A5F1EED824800F5A85D /* UIView+GZactivityView.m */,
 				53BC17F11ED81D3E00DAC861 /* UIViewController+BackButtonHandler.h */,
 				53BC17F21ED81D3E00DAC861 /* UIViewController+BackButtonHandler.m */,
 				53F294411EA612960013F444 /* NSString+GZ.h */,
@@ -2727,6 +2732,7 @@
 				188059C41ED5C68A00191434 /* UIButton+GZCS_FixMultiClick.m in Sources */,
 				18112D3D1EA1F75A000E5ADF /* UINavigationBar+CoverView.m in Sources */,
 				18112D931EA26A89000E5ADF /* AppDelegate+GZRootViewController.m in Sources */,
+				18D96A601EED824800F5A85D /* UIView+GZactivityView.m in Sources */,
 				530311841ED5696100C131F2 /* GZCollectionResultModel.m in Sources */,
 				18112D481EA1F75A000E5ADF /* CityModel.m in Sources */,
 				5311E1351EA88ACC00B7874E /* GZwoDeShouCangController.m in Sources */,

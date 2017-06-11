@@ -42,6 +42,7 @@
 //无网络时图片
 @property (nonatomic, strong) GZNoNetWorking *noNetVC;
 @property (nonatomic, strong) UIView *homeTopView;
+@property (nonatomic, strong) UIView *Loadview;
 
 
 @end
@@ -170,6 +171,17 @@ static NSString *collectionHeaderIdentifier = @"CollectionViewHeaderView";
     return _lineLabel;
 }
 
+-(UIView *)Loadview
+{
+    if (!_Loadview) {
+        _Loadview = [[UIView alloc] initWithFrame:self.view.bounds];
+        _Loadview.backgroundColor = [UIColor clearColor];
+        
+        [self.view addSubview: _Loadview];
+    }
+    return _Loadview;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -184,8 +196,6 @@ static NSString *collectionHeaderIdentifier = @"CollectionViewHeaderView";
     [self.view addSubview:self.collectionView];
     [self.view addSubview:self.headerImg];
     [self.view addSubview:self.lineLabel];
-    
-    [MBProgressHUD showMessage:@"加载中..."];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -230,6 +240,9 @@ static NSString *collectionHeaderIdentifier = @"CollectionViewHeaderView";
     item1.title = classifyStr;
     item2.title = goShoppingStr;
     item3.title = mineStr;
+    
+    self.Loadview.hidden = NO;
+    [self.Loadview appendActivityView:[UIColor lightGrayColor]];
     
     if (_iSenterViewDiDLoad == NO) {
         //默认选中第几行
@@ -278,8 +291,10 @@ static NSString *collectionHeaderIdentifier = @"CollectionViewHeaderView";
     GZResultModel *resultModel = [[GZResultModel alloc] initWithDictionary:obj error:nil];
     
     if ([resultModel.msgcode isEqualToString:@"1"]) {
-        [MBProgressHUD hideHUD];
-
+        
+        self.Loadview.hidden = YES;
+        [self.Loadview removeActivityView];
+        
         NSString *urlStr = [NSString stringWithFormat:@"%@%@",YUMING,[[resultModel.data valueForKey:@"ad"] valueForKey:@"Ad_logo"]];
         
         [self.headerImg sd_setImageWithURL:[NSURL URLWithString:urlStr] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

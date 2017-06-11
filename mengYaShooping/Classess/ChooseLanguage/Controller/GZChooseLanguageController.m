@@ -24,6 +24,8 @@
 @property (nonatomic, strong) UILabel *logoBottomLabel;
 @property (nonatomic, strong) UILabel *logoBottomTwoLabel;
 
+@property (nonatomic, assign) NSInteger ButtonTag;
+
 @end
 
 @implementation GZChooseLanguageController
@@ -35,7 +37,7 @@
 {
     if (!_sureBtn) {
         _sureBtn = [GGZButton createGGZButton];
-        _sureBtn.frame = CGRectMake((kScreenWidth - 100)/ 2 - 15, self.remindLabel.bottom + 200, 100, 32);
+        _sureBtn.frame = CGRectMake((kScreenWidth - 100)/ 2, self.remindLabel.bottom + 200, 100, 32);
 
         [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_sureBtn setTitleColor:YHRGBA(151, 151, 151, 1.0) forState:UIControlStateNormal];
@@ -49,29 +51,26 @@
         
         GZWeakSelf;
         _sureBtn.block = ^(GGZButton *btn) {
-            
-            if ([GGZTool iSSureLogin]) {
-                //调存储语言
-                [weakSelf getLanguageData];
+        
+            if (_isSelectLanguage == YES) {
+                
+                
+                NSString *languageID = [NSString stringWithFormat:@"%zd",weakSelf.ButtonTag];
+                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+                [user setObject:languageID forKey:@"languageID"];
+                
+                [user synchronize];
                 
                 UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                GZTabBarViewController *tab = [[GZTabBarViewController alloc] init];
-                window.rootViewController = tab;
-
+                GZGuideViewController *guideVC = [[GZGuideViewController alloc] init];
+                
+                guideVC.imageArr = @[@"bg_guide_1",@"bg_guide_2",@"bg_guide_3"];
+                window.rootViewController = guideVC;
+                
+                
             }else
             {
-                if (_isSelectLanguage == YES) {
-                    
-                    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-                    GZGuideViewController *guideVC = [[GZGuideViewController alloc] init];
-                    
-                    guideVC.imageArr = @[@"bg_guide_1",@"bg_guide_2",@"bg_guide_3"];
-                    window.rootViewController = guideVC;
-                    
-                }else
-                {
-                    [MBProgressHUD showAlertMessage:@"请选择语言"];
-                }
+                [MBProgressHUD showAlertMessage:@"请选择语言"];
             }
         };
     }
@@ -88,30 +87,30 @@
     return _logoImgV;
 }
 
--(UILabel *)logoBottomLabel
-{
-    if (!_logoBottomLabel) {
-        _logoBottomLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth - 200)/2, self.logoImgV.bottom + 10, 200, 20)];
-        _logoBottomLabel.text = @"更高品质    更好生活";
-        _logoBottomLabel.textColor = YHRGBA(107, 107, 107, 1.0);
-        _logoBottomLabel.textAlignment = NSTextAlignmentCenter;
-        _logoBottomLabel.font = [UIFont systemFontOfSize:14];
-    }
-    return _logoBottomLabel;
-}
+//-(UILabel *)logoBottomLabel
+//{
+//    if (!_logoBottomLabel) {
+//        _logoBottomLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth - 200)/2, self.logoImgV.bottom + 10, 200, 20)];
+//        _logoBottomLabel.text = @"更高品质    更好生活";
+//        _logoBottomLabel.textColor = YHRGBA(107, 107, 107, 1.0);
+//        _logoBottomLabel.textAlignment = NSTextAlignmentCenter;
+//        _logoBottomLabel.font = [UIFont systemFontOfSize:14];
+//    }
+//    return _logoBottomLabel;
+//}
 
--(UILabel *)logoBottomTwoLabel
-{
-    if (!_logoBottomTwoLabel) {
-        _logoBottomTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth - 300)/2, self.logoBottomLabel.bottom + 5, 300, 20)];
-        _logoBottomTwoLabel.text = @"上海梦雅塑业有限公司@2000-2017";
-        _logoBottomTwoLabel.textColor = YHRGBA(183, 184, 176, 1.0);
-        _logoBottomTwoLabel.textAlignment = NSTextAlignmentCenter;
-
-        _logoBottomTwoLabel.font = [UIFont systemFontOfSize:11];
-    }
-    return _logoBottomTwoLabel;
-}
+//-(UILabel *)logoBottomTwoLabel
+//{
+//    if (!_logoBottomTwoLabel) {
+//        _logoBottomTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth - 300)/2, self.logoBottomLabel.bottom + 5, 300, 20)];
+//        _logoBottomTwoLabel.text = @"上海梦雅塑业有限公司@2000-2017";
+//        _logoBottomTwoLabel.textColor = YHRGBA(183, 184, 176, 1.0);
+//        _logoBottomTwoLabel.textAlignment = NSTextAlignmentCenter;
+//
+//        _logoBottomTwoLabel.font = [UIFont systemFontOfSize:11];
+//    }
+//    return _logoBottomTwoLabel;
+//}
 
 - (void)getLanguageData
 {
@@ -150,8 +149,8 @@
 
     [self.view addSubview:self.sureBtn];
     [self.view addSubview:self.logoImgV];
-    [self.view addSubview:self.logoBottomLabel];
-    [self.view addSubview:self.logoBottomTwoLabel];
+//    [self.view addSubview:self.logoBottomLabel];
+//    [self.view addSubview:self.logoBottomTwoLabel];
     
 }
 
@@ -159,10 +158,11 @@
 {
     if (!_remindLabel) {
         _remindLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenWidth - 100)/2, 99 + 36, 100, 20)];
+        
         _remindLabel.text = @"请选择语言";
         _remindLabel.textColor = [UIColor blackColor];
         _remindLabel.font = [UIFont systemFontOfSize:16];
-        _remindLabel.textAlignment = NSTextAlignmentLeft;
+        _remindLabel.textAlignment = NSTextAlignmentCenter;
         
         [self.view addSubview:_remindLabel];
     }
@@ -186,14 +186,15 @@
         [languageBtn setTitleColor:YHRGBA(120, 120, 120, 1.0) forState:UIControlStateNormal];
         [languageBtn setImage:[UIImage imageNamed:@"dian1_"] forState:UIControlStateNormal];
         languageBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+
+        languageBtn.eventTimeInterval = 0.01;
+        [languageBtn layoutButtonWithEdgeInsetsStyle:MKButtonEdgeInsetsStyleLeft imageTitleSpace:15];
         
         if (i == 0) {
-            languageBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -30, 0, 30);
-            languageBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 20);
-        }else
-        {
-            languageBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -22, 0, 22);
-            languageBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -12, 0, 12);
+            
+            languageBtn.imageEdgeInsets = UIEdgeInsetsMake(0, -17, 0, 17);
+         
+            languageBtn.titleEdgeInsets = UIEdgeInsetsMake(0, -2, 0, 2);
         }
         
         languageBtn.tag = i;
@@ -205,11 +206,8 @@
             if (_selectBtn == btn) {
                 
             }else{
-                NSString *languageID = [NSString stringWithFormat:@"%zd",btn.tag];
-                NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-                [user setObject:languageID forKey:@"languageID"];
                 
-                [user synchronize];
+                _ButtonTag = btn.tag;
                 
                 [btn setTitleColor:YHRGBA(0, 0, 0, 1.0) forState:UIControlStateNormal];
                 [btn setImage:[UIImage imageNamed:@"dian2_"] forState:UIControlStateNormal];

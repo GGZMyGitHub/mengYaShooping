@@ -138,8 +138,8 @@
     //uid默认传0
     NSDictionary *param = @{
                             @"ye":@"1",
-                            @"language":uid,
-                            @"uid":@"0",
+                            @"language":[GGZTool iSLanguageID],
+                            @"uid":uid,
                             @"action":@"Index"
                             };
     
